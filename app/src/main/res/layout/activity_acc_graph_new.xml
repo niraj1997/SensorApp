@@ -1,0 +1,102 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    tools:context="com.example.nirajvadhaiya.btp.AccGraphNew">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:textStyle="bold|italic"
+            android:text="Accelerometer"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:gravity="center"
+                android:text="X - Axis"
+                />
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/tvX"/>
+        </LinearLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="350dp"
+            android:layout_height="200sp"
+            android:layout_gravity="center"
+            android:id="@+id/chart1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Y - Axis"
+                />
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/tvY"/>
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="350dp"
+            android:layout_height="200sp"
+            android:layout_gravity="center"
+            android:id="@+id/chart2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Z - Axis"
+                />
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/tvZ"/>
+        </LinearLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart3"
+            android:layout_width="350dp"
+            android:layout_gravity="center"
+            android:layout_height="200sp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+</ScrollView>
+
+
+
