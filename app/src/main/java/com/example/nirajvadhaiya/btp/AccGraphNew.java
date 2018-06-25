@@ -21,8 +21,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
@@ -35,7 +33,7 @@ import static java.time.OffsetDateTime.now;
 public class AccGraphNew extends AppCompatActivity implements SensorEventListener{
     private static final String TAG = "Acc_main";
 
-    DatabaseReference mRef;
+    //DatabaseReference mRef;
     int cnt=0;
 
     private SensorManager mSensorManager;

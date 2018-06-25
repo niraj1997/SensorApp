@@ -33,7 +33,7 @@ dependencies {
     //noinspection GradleCompatible
     compile 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    implementation 'com.google.firebase:firebase-database:11.8.0'
+    //implementation 'com.google.firebase:firebase-database:11.8.0'
     // implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     implementation files('libs/GraphView-4.2.1.jar')
     implementation files('libs/opencsv-4.1.jar')
