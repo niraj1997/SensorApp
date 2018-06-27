@@ -1,6 +1,7 @@
 package com.example.nirajvadhaiya.btp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -21,7 +22,10 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.opencsv.CSVWriter;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 
 import javax.mail.AuthenticationFailedException;
@@ -42,6 +46,9 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
     private Thread thread;
     private boolean plotData = true;
     TextView tvX,tvY,tvZ;
+
+    String filePath=android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysisss.csv";
+
     //String filePath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/Analysis.csv";
 //    java.io.File f = new java.io.File(filePath );
     java.io.File f=null;
@@ -53,6 +60,12 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
 
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+
+        String filePath=android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"output.csv";
+        Log.d("woohoo!!",filePath+"************");
+        f = new java.io.File(filePath );
+        Log.d("file????????????",f.exists()+"*************");
 
         if( mAccelerometer != null ){
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
@@ -266,12 +279,15 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         Log.d("woohoo!!","????????????????//////////////////");
 
 
+        String[] da={""+event.values[0],""+event.values[0],""+event.values[0]};
+
+        Log.d("!!!!!!!!!!!!!!!!!!!",da[0]+"*******************");
 
         // File exist
-        String filePath=android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysis.csv";
+
 
         com.opencsv.CSVWriter writer;
-//        Log.d("woohoo!!",filePath+"....."+f.exists()+".........................."+f.isDirectory()+"........................");
+
 
         //java.io.File f=null;
         if(f!=null && f.exists()){
@@ -284,11 +300,14 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
             f = new java.io.File(filePath );
         }
 
-        String[] da={""+event.values[0],""+event.values[0],""+event.values[0]};
+        Log.d("woohoo!!",filePath+"************"+f.exists()+"*********************"+f.isDirectory()+"*****************");
+
+
+        //String[] da={""+event.values[0],""+event.values[0],""+event.values[0]};
         writer.writeNext(da);
 
         Log.d("lol:","Successful.................................");
-        writer.close();
+//        writer.close();
 
     }
 
@@ -347,11 +366,12 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
 
     @Override
     public void onBackPressed() {
-        String[] recipients = {"nirajvadhaiya@gmail.com","gauravlad21@gmail.com"};
+
+        String[] recipients = {"nirajvadhaiya@gmail.com","gauravlad21@gmail.com","csharp.pramod@gmail.com"};
         SendEmailAsyncTask emailAsyncTask = new SendEmailAsyncTask();
 //emailAsyncTask.activity = this;
         String id = "slotter2018@gmail.com";
-        String pass = "Abcd1234.";
+        String pass = "Abcd12345.";
         emailAsyncTask.m = new Mail(id, pass);
         emailAsyncTask.m.set_from(id);
         emailAsyncTask.m.setBody("Congratulations!\nData of Accelerometer has been collected sccessfully!\n\n\n\n\nRegards\nLAD & NIRAJ\n" );
@@ -359,7 +379,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         emailAsyncTask.m.set_subject("live sensor data");
         try {
 //            Toast.makeText(context.getApplicationContext(), "Attachment Passed",Toast.LENGTH_SHORT).show();
-            emailAsyncTask.m.addAttachment(""+android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysis.csv", "SomeData.csv");
+            emailAsyncTask.m.addAttachment(""+android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysisss.csv", "SomeData.csv");
             Log.d("o","Attachment Passed.........................................................");
         }
         catch (Exception e) {
@@ -368,7 +388,13 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
             return;
         }
         emailAsyncTask.execute();
-        Log.d("o","message Passed...RIP.........................................................");
+        Log.d("o","message Passed...RIP............+++++++++++++++++.............................................");
+
+       /* Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+*/
         super.onBackPressed();
     }
 }

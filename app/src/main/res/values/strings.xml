@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BTP</string>
+    <string name="title_activity_on_exit">OnExit</string>
 </resources>
