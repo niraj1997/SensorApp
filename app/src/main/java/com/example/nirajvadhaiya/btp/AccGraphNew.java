@@ -1,18 +1,17 @@
 package com.example.nirajvadhaiya.btp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -22,17 +21,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.opencsv.CSVWriter;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Calendar;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
-
-import static android.os.Build.ID;
-import static java.time.OffsetDateTime.now;
 
 public class AccGraphNew extends AppCompatActivity implements SensorEventListener{
     private static final String TAG = "Acc_main";
@@ -53,6 +46,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
 //    java.io.File f = new java.io.File(filePath );
     java.io.File f=null;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +55,6 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-
-        String filePath=android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"output.csv";
-        Log.d("woohoo!!",filePath+"************");
-        f = new java.io.File(filePath );
-        Log.d("file????????????",f.exists()+"*************");
 
         if( mAccelerometer != null ){
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
@@ -197,10 +186,6 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         zChart.setDrawBorders(false);
 
 
-//        String filePath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/Analysis.csv";
-//        java.io.File f = new java.io.File(filePath);
-
-
         startOn();
     }
 
@@ -307,7 +292,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         writer.writeNext(da);
 
         Log.d("lol:","Successful.................................");
-//        writer.close();
+        writer.close();
 
     }
 
@@ -368,6 +353,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
     public void onBackPressed() {
 
         String[] recipients = {"nirajvadhaiya@gmail.com","gauravlad21@gmail.com","csharp.pramod@gmail.com"};
+
         SendEmailAsyncTask emailAsyncTask = new SendEmailAsyncTask();
 //emailAsyncTask.activity = this;
         String id = "slotter2018@gmail.com";
@@ -379,7 +365,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         emailAsyncTask.m.set_subject("live sensor data");
         try {
 //            Toast.makeText(context.getApplicationContext(), "Attachment Passed",Toast.LENGTH_SHORT).show();
-            emailAsyncTask.m.addAttachment(""+android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysisss.csv", "SomeData.csv");
+            emailAsyncTask.m.addAttachment(""+android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + java.io.File.separator+"Analysisss.csv", "AccData.csv");
             Log.d("o","Attachment Passed.........................................................");
         }
         catch (Exception e) {
@@ -390,11 +376,7 @@ public class AccGraphNew extends AppCompatActivity implements SensorEventListene
         emailAsyncTask.execute();
         Log.d("o","message Passed...RIP............+++++++++++++++++.............................................");
 
-       /* Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
-*/
+
         super.onBackPressed();
     }
 }
