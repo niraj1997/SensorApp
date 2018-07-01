@@ -35,6 +35,8 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             lati.setText("Latitude : "+latitude);
             longi.setText("Longitude : "+longitude);
 
-            if((latitude-23.18 <=0 && longitude-72.62<=0) || dist<1 && !bo )
+            if( (abs(latitude-23.18) <=0 && abs(longitude-72.62) <=0 ) && !bo )
             {
                 bo=true;
                 Intent intent = new Intent(this, AccGraphNew.class);
